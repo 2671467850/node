@@ -1,0 +1,73 @@
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: Ankang
+ * @Date: 2021-05-18 22:01:58
+ * @LastEditors: Ankang
+ * @LastEditTime: 2021-05-18 22:56:09
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div style="width: 200px;height: 200px;position: relative;">
+    <img src="" alt="" id="pic" style="width: 100%;height: 100%;">
+    <span id="del" style="position: absolute;top: 0;right: 0;background: red;cursor: pointer;">X</span>
+  </div>
+  <div>
+    <input type="file" id="file">
+  </div>
+
+
+  <script>
+    const fileDom = document.querySelector('#file');
+    const delDom = document.querySelector('#del')
+    let file;
+    fileDom.addEventListener('change', fileChangeHandler)
+    delDom.addEventListener('click', delClickHandler)
+
+    function delClickHandler(e) {
+      //点击时获取图片地址
+      // console.log(pic.src)
+      let src = pic.src.split('/').pop()
+      const xhr1 = new XMLHttpRequest;
+      xhr1.open('POST', '/delete', true);
+      xhr1.setRequestHeader('filename', src)
+      xhr1.send(this.result)
+      xhr1.addEventListener('readystatechange', xhrstateChangeHandler)
+      fileDom.value = '';
+    }
+
+    function fileChangeHandler(e) {
+      file = this.files[0];
+      const fileReader = new FileReader()
+      // 把得到的File对象转为流  stream可以通过ajax发送
+      fileReader.readAsArrayBuffer(file)
+      fileReader.addEventListener('loadend', fileLoadendHandler)
+    }
+
+    function fileLoadendHandler(e) {
+      const xhr = new XMLHttpRequest;
+      xhr.open('POST', '/upload', true);
+      xhr.setRequestHeader('filename', file.name)
+      xhr.send(this.result)
+      xhr.addEventListener('readystatechange', xhrstateChangeHandler)
+    }
+
+    function xhrstateChangeHandler(e) {
+      if (this.readyState === 4 && this.status === 200) {
+        let json = eval('(' + this.responseText + ')')
+        pic.src = json.url
+      }
+    }
+  </script>
+</body>
+
+</html>
