@@ -1,0 +1,17 @@
+{
+  "name": "day0517",
+  "version": "1.0.0",
+  "description": "nodeJS相关学习",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Node.js"
+  ],
+  "author": "Ankang",
+  "license": "ISC",
+  "dependencies": {
+    "minimist": "^1.2.5"
+  }
+}
