@@ -4,7 +4,7 @@
  * @Author: Ankang
  * @Date: 2021-05-19 00:14:32
  * @LastEditors: Ankang
- * @LastEditTime: 2021-05-19 03:17:52
+ * @LastEditTime: 2021-05-19 08:41:27
  */
 const http = require('http')
 const fs = require('fs')
@@ -50,11 +50,11 @@ http.createServer((req, res) => {
                 let textPath = path.join(webRoot, `data/${userfile}.txt`);
                 let times = 1;
 
+                res.setHeader('Content-Type', 'text/html;charset=utf-8');
                 if (fs.existsSync(textPath)) {
                     let data = fReadFile(textPath);
                     data = parseInt(data)
                     // console.log(data)
-                    res.setHeader('Content-Type', 'text/html;charset=utf-8');
                     res.setHeader('Set-Cookie', `times=${data};expires=${setCookieTiem()}`);
                     if (data >= 3) {
                         res.write(JSON.stringify({ code: 2, msg: '密码错误次数过多，明日再试' }))
@@ -69,7 +69,7 @@ http.createServer((req, res) => {
                     }
                 } else {
                     fWriteFile(textPath, times)
-                    res.write(JSON.stringify({ code: 5, msg: '初始化账号成功' }))
+                    res.write(JSON.stringify({ code: 5, msg: '账号文件创建成功' }))
                 }
                 res.end()
             })
