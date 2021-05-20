@@ -1,0 +1,51 @@
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: Ankang
+ * @Date: 2021-05-20 20:04:02
+ * @LastEditors: Ankang
+ * @LastEditTime: 2021-05-20 23:05:15
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+  <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+</head>
+
+<body>
+  <form action="/login" method="post" id="loginForm">
+    <div>
+      <input type="text" name="username" placeholder="账号admin">
+    </div>
+    <div>
+      <input type="text" name="password" placeholder="密码admin">
+    </div>
+    <div>
+      <button>进入后台</button>
+    </div>
+  </form>
+
+  <script>
+    $(function () {
+      $("#loginForm").validate({
+        rules: {
+          username: {
+            required: true,
+            minlength: 3
+          },
+          password: "required",
+        }
+      });
+    })
+  </script>
+
+</body>
+
+</html>
