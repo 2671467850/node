@@ -1,0 +1,56 @@
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: Ankang
+ * @Date: 2021-05-22 16:55:22
+ * @LastEditors: Ankang
+ * @LastEditTime: 2021-05-23 20:48:00
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery.form.js"></script>
+    <script src="/layui/layui.js"></script>
+</head>
+
+<body>
+    <table lay-filter="demo" id="demo">
+        <thead>
+            <tr>
+                <th lay-data="{field:'all', width:100, checkbox:true}">全选</th>
+                <th lay-data="{field:'id', width:300,type:'numbers'}">ID</th>
+                <th lay-data="{field:'username', width:300, edit:true}">用户名</th>
+                <th lay-data="{field:'sex', width:300, edit:true}">性别</th>
+                <th lay-data="{field:'password', edit:true}">密码</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{each data}}
+            <tr>
+                <td></td>
+                <td></td>
+                <td>{{$value.username}}</td>
+                <td>{{$value.sex}}</td>
+                <td>{{$value.password}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <script type="text/html" id="toolbarDemo">
+        <div class="layui-btn-container">
+          <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+          <button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>
+          <button class="layui-btn layui-btn-sm" lay-event="update">编辑</button>
+        </div>
+    </script>
+    <script src="/js/table.js"></script>
+</body>
+
+</html>
