@@ -1,0 +1,41 @@
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: Ankang
+ * @Date: 2021-05-20 20:54:44
+ * @LastEditors: Ankang
+ * @LastEditTime: 2021-05-21 08:43:39
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="/logout" method="GET">
+        <button>注销</button>
+    </form>
+    <iframe src="./header.html" frameborder="0" style="width:100%;height:60px;background: saddlebrown;"></iframe>
+    <!--插入头部页面，设置样式-->
+    <div style="width:100%;height:300px;">
+        <!--主体样式，设置样式-->
+        <div style="width: 30%; height: 100%; float: left;">
+            <!--插入主体左边页面，设置样式-->
+            <iframe src="./side.html" width="100%" height="" frameborder="0"></iframe>
+        </div>
+        <div style="width: 70%; height: 100%; float: right;">
+            <!--插入主体右边页面，设置样式-->
+            <iframe name="main" src="./page1.html" width="100%" height="" frameborder="0"></iframe>
+            <!--链接到左侧页面中第一个页面，设置name名-->
+        </div>
+    </div>
+    <iframe src="./footer.html" frameborder="0" style="width:100%;height:60px;background: saddlebrown;"></iframe>
+    <!--插入底部页面，设置样式-->
+</body>
+
+</html>
