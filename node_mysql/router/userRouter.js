@@ -4,13 +4,14 @@
  * @Author: Ankang
  * @Date: 2021-05-22 17:00:45
  * @LastEditors: Ankang
- * @LastEditTime: 2021-05-23 18:30:07
+ * @LastEditTime: 2021-05-24 09:01:20
  */
 const router = require('express').Router()
-const {index,add} = require('../controller/userController')
+const {index,add,del} = require('../controller/userController')
 
 router.get('/users',index)
 
 router.post('/add',add)
+router.post('/del',del)
 
 module.exports = router

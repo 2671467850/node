@@ -4,7 +4,7 @@
  * @Author: Ankang
  * @Date: 2021-05-21 22:22:41
  * @LastEditors: Ankang
- * @LastEditTime: 2021-05-23 18:50:40
+ * @LastEditTime: 2021-05-24 09:07:20
  */
 const query = require('./conn')
 
@@ -15,10 +15,16 @@ module.exports = {
         return await query(sql)
     },
     async addUser(username, sex, password){
-        console.log(username, sex, password)
+        // console.log(username, sex, password)
         const sql = `insert into users values (NULL,'${username}','${sex}','${password}')`;
         let result = await query(sql);
-        console.log(result);
+        // console.log(result);
+    },
+    async delUser(username, sex, password){
+        // console.log(username, sex, password)
+        const sql = `delete from users where username='${username}'`;
+        let result = await query(sql);
+        // console.log(result);
     },
 
     

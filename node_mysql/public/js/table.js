@@ -4,7 +4,7 @@
  * @Author: Ankang
  * @Date: 2021-05-23 15:54:13
  * @LastEditors: Ankang
- * @LastEditTime: 2021-05-23 20:59:56
+ * @LastEditTime: 2021-05-24 09:00:45
  */
 var table = layui.table;
 //转换静态表格
@@ -15,8 +15,8 @@ table.init('demo', {
   , toolbar: '#toolbarDemo'
 });
 // 弹出层页面
-var addHtml = 
-'<form id="form1" class="layui-form" style="width:460px; margin-top: 20px;">\
+var addHtml =
+  '<form id="form1" class="layui-form" style="width:460px; margin-top: 20px;">\
     <div class="layui-form-item">\
       <label class="layui-form-label">用户名</label>\
       <div class="layui-input-block">\
@@ -51,7 +51,28 @@ table.on('toolbar(demo)', function (obj) {
       });
       break;
     case 'delete':
-      layer.msg('删除');
+      layer.confirm("你确定要删除么？", { btn: ['是的,我确定', '我再想想'] },
+        function () {
+          var Data = table.cache["demo"];
+          // console.log(Data)
+          // console.log(checkStatus.data[0])
+          if (checkStatus.data[0] != undefined) {
+            let newData;
+            newData = Data.filter(item => {
+              return item.username != checkStatus.data[0].username;
+            })
+            $.post('/admin/del', checkStatus.data[0])
+            table.reload("demo", {
+              data: newData   // 将新数据重新载入表格
+            })
+            layer.closeAll()
+            layer.msg('删除成功');
+          }else{
+            layer.closeAll()
+            layer.msg('请选择一行数据');
+          }
+        }
+      )
       break;
     case 'update':
       layer.msg('编辑');
