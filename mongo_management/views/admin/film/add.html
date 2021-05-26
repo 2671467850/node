@@ -4,7 +4,7 @@
  * @Author: Ankang
  * @Date: 2021-05-25 22:30:35
  * @LastEditors: Ankang
- * @LastEditTime: 2021-05-26 11:52:19
+ * @LastEditTime: 2021-05-26 22:56:06
 -->
 {{extend '../layout/main.html'}}
 
@@ -32,14 +32,20 @@
         <button type="button" class="layui-btn" id="test1">上传海报</button>
         <div class="layui-upload-list">
           <img class="layui-upload-img" id="demo1" style="width: 100px;height: 100px;">
-          <input type="hidden" name="pic" id="pic"
-                  value="http://www.mobiletrain.org/images/index/new_logo.png?t=5.28">
+          <input type="hidden" name="pic" id="pic" value="http://www.mobiletrain.org/images/index/new_logo.png?t=5.28">
           <p id="demoText"></p>
         </div>
         <div style="width: 95px;">
           <div class="layui-progress layui-progress-big" lay-showpercent="yes" lay-filter="demo">
             <div class="layui-progress-bar" lay-percent=""></div>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">剧情：</label>
+      <div class="layui-input-block">
+        <div id="editbody">
         </div>
       </div>
     </div>
@@ -123,15 +129,21 @@
     laydate.render({
       elem: '#date1'
     });
+    // 富文本
+    const E = window.wangEditor
+    const editor = new E('#editbody')
+    editor.create();
 
     //监听提交
     form.on('submit(formDemo)', function (data) {
-      console.log(data.field)
+      data.field.body = editor.txt.html()
+      // console.log(data.field)
       $.post('/admin/film/add', data.field)
       // layer.msg(JSON.stringify(data.field));
-      layer.msg('发布成功', { icon: 1 });
+      // layer.msg('发布成功', { icon: 1 });
       // return false;
     });
   });
+
 </script>
 {{/block}}

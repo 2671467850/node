@@ -1,0 +1,76 @@
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: Ankang
+ * @Date: 2021-05-26 21:52:33
+ * @LastEditors: Ankang
+ * @LastEditTime: 2021-05-26 23:14:41
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/admin/users/layui/css/layui.css">
+    <script src="/admin/users/js/jquery.js"></script>
+    <script src="/admin/users/js/jquery.form.js"></script>
+    <script src="/admin/users/layui/layui.js"></script>
+    <style>
+        .layui-table-cell {
+            height: 80px;
+            line-height: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <table lay-filter="demo" id="demo">
+        <thead>
+            <tr>
+                <th lay-data="{field:'all', width:100, checkbox:true}">全选</th>
+                <th lay-data="{field:'id', width:100,type:'numbers'}">ID</th>
+                <th lay-data="{field:'title', width:200}">影片名</th>
+                <th lay-data="{field:'date', width:200}">上映时间</th>
+                <th lay-data="{field:'body', width:300}">剧情</th>
+                <th lay-data="{field:'pic'}">图片</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{each data}}
+            <tr>
+                <td></td>
+                <td></td>
+                <td>{{$value.title}}</td>
+                <td>{{$value.date}}</td>
+                <td>{{$value.body}}</td>
+                <td><img src="{{$value.pic}}" alt="" style="height: 100%;"></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <!-- <script type="text/html" id="toolbarDemo">
+        <div class="layui-btn-container">
+          <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+          <button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>
+          <button class="layui-btn layui-btn-sm" lay-event="update">编辑</button>
+        </div>
+    </script> -->
+    <script src="/admin/users/js/filmtable.js"></script>
+    <script src="/admin/wangEditor/wangEditor.min.js"></script>
+    <script>
+        var table = layui.table;
+        //转换静态表格
+        table.init('demo', {
+            height: 550 //设置高度
+            , limit: 10 //注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
+            //支持所有基础参数
+            , toolbar: '#toolbarDemo'
+            , page: true
+        });
+    </script>
+</body>
+
+</html>

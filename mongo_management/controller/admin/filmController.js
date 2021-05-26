@@ -4,13 +4,15 @@
  * @Author: Ankang
  * @Date: 2021-05-25 22:32:54
  * @LastEditors: Ankang
- * @LastEditTime: 2021-05-26 11:10:45
+ * @LastEditTime: 2021-05-26 22:51:43
  */
 // 模型
 const filmModel = require('../../db/model/filmModel')
 module.exports = {
-  index(req, res) {
-    res.send('影片列表')
+  async index(req, res) {
+    // res.send('影片列表')
+    let data = await filmModel.all()
+    res.render('admin/film/index.html', { data })
   },
   add(req, res) {
     res.render('admin/film/add.html')
@@ -29,9 +31,9 @@ module.exports = {
     console.log(postData)
     delete postData['file']
     let ret = await filmModel.store(postData)
-    if(ret){
+    if (ret) {
       res.redirect('/admin/film/index')
-    }else{
+    } else {
       res.redirect('/admin/film/add')
     }
   }
