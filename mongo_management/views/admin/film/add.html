@@ -1,0 +1,137 @@
+<!--
+ * @Descripttion: 
+ * @version: 1.0
+ * @Author: Ankang
+ * @Date: 2021-05-25 22:30:35
+ * @LastEditors: Ankang
+ * @LastEditTime: 2021-05-26 11:52:19
+-->
+{{extend '../layout/main.html'}}
+
+{{block name="main"}}
+
+<div class="main" style="width: 700px;margin:auto">
+  <form class="layui-form">
+    <div class="layui-form-item">
+      <label class="layui-form-label">电影名</label>
+      <div class="layui-input-block">
+        <input type="text" name="title" required lay-verify="required" placeholder="请输入片名" autocomplete="off"
+          class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-inline">
+        <label class="layui-form-label" style="width: 90px;">上映时间</label>
+        <div class="layui-input-block">
+          <input type="text" name="date" id="date1" autocomplete="off" class="layui-input">
+        </div>
+      </div>
+    </div>
+    <div class="layui-form-item" style="margin-left: 120px;">
+      <div class="layui-upload">
+        <button type="button" class="layui-btn" id="test1">上传海报</button>
+        <div class="layui-upload-list">
+          <img class="layui-upload-img" id="demo1" style="width: 100px;height: 100px;">
+          <input type="hidden" name="pic" id="pic"
+                  value="http://www.mobiletrain.org/images/index/new_logo.png?t=5.28">
+          <p id="demoText"></p>
+        </div>
+        <div style="width: 95px;">
+          <div class="layui-progress layui-progress-big" lay-showpercent="yes" lay-filter="demo">
+            <div class="layui-progress-bar" lay-percent=""></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button class="layui-btn" lay-submit lay-filter="formDemo">发布</button>
+      </div>
+    </div>
+  </form>
+</div>
+{{/block}}
+
+{{block name='css'}}
+<link rel="stylesheet" type="text/css" href="/admin/css/plugins/webuploader/webuploader.css">
+<link rel="stylesheet" href="/admin/layui/css/layui.css" media="all">
+{{/block}}
+
+{{block name='js'}}
+<script src="/admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/admin/js/plugins/validate/messages_zh.min.js"></script>
+<script src="/admin/js/plugins/webuploader/webuploader.min.js"></script>
+<script src="/admin/js/wangEditor/wangEditor.min.js"></script>
+<script src="/admin/layui/layui.js"></script>
+
+<script>
+  // 文件上传
+  layui.use(['upload', 'element', 'layer', 'form', 'laydate'], function () {
+    var form = layui.form;
+    var $ = layui.jquery
+      , upload = layui.upload
+      , element = layui.element
+      , form = layui.form
+      , layer = layui.layer
+      , laydate = layui.laydate;
+
+    //常规使用 - 普通图片上传
+    var uploadInst = upload.render({
+      elem: '#test1'
+      , url: '/admin/film/upfile' //改成您自己的上传接口
+      , before: function (obj) {
+        //预读本地文件示例，不支持ie8
+        obj.preview(function (index, file, result) {
+          $('#demo1').attr('src', result); //图片链接（base64）
+        });
+
+        element.progress('demo', '0%'); //进度条复位
+        layer.msg('上传中', { icon: 16, time: 0 });
+      }
+      , done: function (res) {
+        //如果上传失败
+        if (res.code > 0) {
+          return layer.msg('上传失败');
+        }
+        $("#pic").val(res.url)
+        // console.log($("#pic").val())
+        //上传成功的一些操作
+        //……
+        $('#demoText').html(''); //置空上传失败的状态
+      }
+      , error: function () {
+        //演示失败状态，并实现重传
+        var demoText = $('#demoText');
+        demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+        demoText.find('.demo-reload').on('click', function () {
+          uploadInst.upload();
+        });
+      }
+      //进度条
+      , progress: function (n, index, e) {
+        element.progress('demo', n + '%'); //可配合 layui 进度条元素使用
+        if (n == 100) {
+          layer.msg('上传完毕', { icon: 1 });
+        }
+      }
+    });
+
+    //日期
+    laydate.render({
+      elem: '#date'
+    });
+    laydate.render({
+      elem: '#date1'
+    });
+
+    //监听提交
+    form.on('submit(formDemo)', function (data) {
+      console.log(data.field)
+      $.post('/admin/film/add', data.field)
+      // layer.msg(JSON.stringify(data.field));
+      layer.msg('发布成功', { icon: 1 });
+      // return false;
+    });
+  });
+</script>
+{{/block}}
