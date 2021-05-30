@@ -4,7 +4,7 @@
  * @Author: Ankang
  * @Date: 2021-05-22 10:35:07
  * @LastEditors: Ankang
- * @LastEditTime: 2021-05-26 22:53:30
+ * @LastEditTime: 2021-05-27 08:54:26
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -52,6 +52,10 @@
               <input name="password" type="password" value="admin" placeholder="密码" id="password">
             </div>
             <div class="input-field">
+              <img id="yzm_pic" src="/admin/getCode?_v=1231" onclick="refish()"/>
+              <input name="yzm" type="text" placeholder="验证码" id="yzm">
+            </div>
+            <div class="input-field">
               <input type="button" value="登录" id="loginBtn">
             </div>
           </form>
@@ -60,6 +64,12 @@
     </div>
   </main>
   <script src="js/login.js"></script>
+  <script>
+    function refish(){
+      // console.log('/admin/getCode?_v='+parseInt(Math.random()*10000))
+      $('#yzm_pic')[0].src = '/admin/getCode?_v='+parseInt(Math.random()*10000);
+    }
+  </script>
 </body>
 
 </html>

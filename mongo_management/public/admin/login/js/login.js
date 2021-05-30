@@ -4,7 +4,7 @@
  * @Author: Ankang
  * @Date: 2021-05-22 10:35:23
  * @LastEditors: Ankang
- * @LastEditTime: 2021-05-25 22:43:04
+ * @LastEditTime: 2021-05-27 08:53:44
  */
 $('header .login').onclick = function (e) {
   e.stopPropagation()
@@ -26,12 +26,15 @@ $('#loginBtn').click(function () {
   }
   let username = $('#username').val()
   let password = $('#password').val()
-  $.post('/admin/login',{username,password}).then(res => {
+  let yzm = $('#yzm').val()
+  console.log(yzm)
+  $.post('/admin/login',{username,password,yzm}).then(res => {
     if (res.code == 0) {
       // alert(res.msg)
       location.href = '/admin/index'
     } else {
       alert(res.msg)
+      location.reload()
     }
   })
 })

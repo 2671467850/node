@@ -4,7 +4,7 @@
  * @Author: Ankang
  * @Date: 2021-05-23 15:54:13
  * @LastEditors: Ankang
- * @LastEditTime: 2021-05-24 09:00:45
+ * @LastEditTime: 2021-05-25 11:27:33
  */
 var table = layui.table;
 //转换静态表格
@@ -13,6 +13,7 @@ table.init('demo', {
   , limit: 10 //注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
   //支持所有基础参数
   , toolbar: '#toolbarDemo'
+  ,page: true
 });
 // 弹出层页面
 var addHtml =

@@ -4,14 +4,18 @@
  * @Author: Ankang
  * @Date: 2021-05-25 20:38:28
  * @LastEditors: Ankang
- * @LastEditTime: 2021-05-25 21:18:16
+ * @LastEditTime: 2021-05-27 08:52:25
  */
 const router = require('express').Router()
-const {index,login} = require('../../controller/admin/loginController')
+const { index, login ,yzmdl} = require('../../controller/admin/loginController')
+
 
 //登录页面
-router.get('/login',index);
+router.get('/login', index);
 
-router.post('/login',login)
+//验证码
+router.get('/getCode', yzmdl)
+
+router.post('/login', login)
 
 module.exports = router;
